@@ -1,6 +1,8 @@
 require 'gosu'
 
 class Player
+  attr_accessor :x, :y
+
   def initialize(x, y)
     @x = x
     @y = y
@@ -19,7 +21,7 @@ class Tutorial < Gosu::Window
   end
 
   def draw
-    Gosu.draw_rect(@player.x, @player.y, 5, 5, Gosu.AQUA)
+    Gosu.draw_rect(@player.x, @player.y, 50, 50, Gosu::Color::AQUA)
   end
 end
 
