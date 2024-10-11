@@ -1,28 +1,35 @@
 require 'gosu'
 
 class Player
-  attr_accessor :x, :y
+  attr_accessor :x, :y, :width
 
-  def initialize(x, y)
+  def initialize(x, y, width)
     @x = x
     @y = y
+    @width = width
   end
 end
 
 class Rubytris < Gosu::Window
+  attr_reader :width, :height, :vSpeed, :hSpeed
+
   def initialize
-    super 640, 480
+    @width = 640
+    @height = 480
+    @vSpeed = 3
+    @hSpeed = 2.7
+    super(@width, @height)
     self.caption = 'Tutorial Game'
-    @player = Player.new(20, 20)
+    @player = Player.new(20, 20, 100)
   end
 
   def update
-    @player.x = (@player.x + 0.1) %
-                @player.y += 0.5
+    @player.x = (@player.x + @hSpeed) % @width
+    @player.y = (@player.y + @vSpeed) % @height
   end
 
   def draw
-    Gosu.draw_rect(@player.x, @player.y, 50, 50, Gosu::Color::AQUA)
+    Gosu.draw_rect(@player.x, @player.y, @player.width, @player.width, Gosu::Color::AQUA)
   end
 end
 
