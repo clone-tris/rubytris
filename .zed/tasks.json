@@ -1,0 +1,7 @@
+[
+  {
+    "label": "Run project",
+    "command": "ruby lib/rubytris.rb",
+    "shell": "system"
+  }
+]

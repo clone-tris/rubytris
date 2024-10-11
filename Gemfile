@@ -1,4 +1,5 @@
+source 'https://rubygems.org'
 
-source "https://rubygems.org"
+gem 'gosu'
 
-gem "gosu"
+gem 'solargraph', group: :development
