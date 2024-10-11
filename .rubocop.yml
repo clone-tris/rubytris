@@ -4,3 +4,5 @@ Documentation:
   Enabled: false
 Naming/MethodParameterName:
   Enabled: false
+Style/EndOfLine:
+  EnforcedStyle: lf

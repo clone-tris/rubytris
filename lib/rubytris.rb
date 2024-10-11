@@ -9,7 +9,7 @@ class Player
   end
 end
 
-class Tutorial < Gosu::Window
+class Rubytris < Gosu::Window
   def initialize
     super 640, 480
     self.caption = 'Tutorial Game'
@@ -17,7 +17,8 @@ class Tutorial < Gosu::Window
   end
 
   def update
-    # ...
+    @player.x = (@player.x + 0.1) %
+                @player.y += 0.5
   end
 
   def draw
@@ -25,4 +26,4 @@ class Tutorial < Gosu::Window
   end
 end
 
-Tutorial.new.show
+Rubytris.new.show
