@@ -1,8 +1,8 @@
 Style/FrozenStringLiteralComment:
   Enabled: false
-Documentation:
+Style/Documentation:
   Enabled: false
 Naming/MethodParameterName:
   Enabled: false
-Style/EndOfLine:
+Layout/EndOfLine:
   EnforcedStyle: lf
