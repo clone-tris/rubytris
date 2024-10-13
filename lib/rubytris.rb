@@ -1,7 +1,5 @@
 $LOAD_PATH.unshift(File.expand_path('.', __dir__))
 
-puts $LOAD_PATH
-
 require 'gosu'
 
 require 'config'
