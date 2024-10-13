@@ -55,4 +55,11 @@ class Shape
     @width = max_column - min_column + 1
   end
   # rubocop:enable Metrics/AbcSize
+
+  # @param row_direction [Integer]
+  # @param column_direction [Integer]
+  def translate(row_direction, column_direction)
+    @row += row_direction
+    @column += column_direction
+  end
 end
