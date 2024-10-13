@@ -16,6 +16,8 @@ GEM
     language_server-protocol (3.17.0.3)
     nokogiri (1.16.7-x64-mingw-ucrt)
       racc (~> 1.4)
+    nokogiri (1.16.7-x86_64-linux)
+      racc (~> 1.4)
     parallel (1.26.3)
     parser (3.3.5.0)
       ast (~> 2.4.1)
@@ -63,10 +65,12 @@ GEM
 
 PLATFORMS
   x64-mingw-ucrt
+  x86_64-linux
 
 DEPENDENCIES
   gosu
   solargraph
+  yard
 
 BUNDLED WITH
    2.5.16

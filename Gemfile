@@ -2,4 +2,7 @@ source 'https://rubygems.org'
 
 gem 'gosu'
 
-gem 'solargraph', group: :development
+group :development do
+  gem 'solargraph', group: :development
+  gem 'yard'
+end

@@ -6,3 +6,8 @@ Naming/MethodParameterName:
   Enabled: false
 Layout/EndOfLine:
   EnforcedStyle: lf
+Lint/UselessAssignment:
+  Enabled: true
+  AutoCorrect: false
+Metrics/MethodLength:
+  Enabled: false

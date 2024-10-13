@@ -1,7 +1,11 @@
+$LOAD_PATH.unshift(File.expand_path('.', __dir__))
+
+puts $LOAD_PATH
+
 require 'gosu'
 
-require_relative 'config'
-require_relative 'screens/game/components/square'
+require 'config'
+require 'screens/game/components/shape'
 
 class Rubytris < Gosu::Window
   attr_reader :width, :height
@@ -12,9 +16,19 @@ class Rubytris < Gosu::Window
     super(@width, @height)
     self.caption = 'Tutorial Game'
 
-    square = Square.new(0, 1, Gosu::Color::AQUA)
+    shape = Shape.new(
+      0,
+      0,
+      [
+        Square.new(0, 0, Gosu::Color::AQUA),
+        Square.new(0, 1, Gosu::Color::AQUA),
+        Square.new(1, 0, Gosu::Color::AQUA),
+        Square.new(1, 1, Gosu::Color::AQUA)
+      ],
+      Gosu::Color::CYAN
+    )
     @buffer_image = Gosu.record(300, 300) do
-      square.draw(0, 0)
+      shape.draw
     end
   end
 
