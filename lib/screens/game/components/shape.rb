@@ -62,4 +62,8 @@ class Shape
     @row += row_direction
     @column += column_direction
   end
+
+  def copy
+    Shape.new(@row, @column, @squares.map(&:copy), @color)
+  end
 end
