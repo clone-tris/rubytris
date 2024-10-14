@@ -54,21 +54,22 @@ class Shape
   end
   # rubocop:enable Metrics/AbcSize
 
+  def copy
+    Shape.new(@row, @column, @squares.map(&:copy), @color)
+  end
+
+  # @return [Array<Square>]
+  def absolute_squares
+    # make square calculate its own absolute position
+    @squares.map do |square|
+      square.absolute_copy(@row, @column)
+    end
+  end
+
   # @param row_direction [Integer]
   # @param column_direction [Integer]
   def translate(row_direction, column_direction)
     @row += row_direction
     @column += column_direction
-  end
-
-  def copy
-    Shape.new(@row, @column, @squares.map(&:copy), @color)
-  end
-
-  def absolute_grid
-    # make square calculate its own absolute position
-    @squares.map do |square|
-      square.absolute_copy(@row, @column)
-    end
   end
 end
