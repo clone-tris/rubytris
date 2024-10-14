@@ -16,10 +16,8 @@ class Shape
 
   # @param row [Integer]
   # @param column [Integer]
-  # @param width [Integer]
-  # @param height [Integer]
-  # @param color [Gosu::Color]
   # @param squares [Array<Square>]
+  # @param color [Gosu::Color]
   def initialize(row, column, squares, color)
     @row = row
     @column = column
@@ -70,10 +68,7 @@ class Shape
   def absolute_grid
     # make square calculate its own absolute position
     @squares.map do |square|
-      absolute_square = square.copy
-      absolute_square.row = square.row + @row
-      absolute_square.column = square.column + @column
-      absolute_square
+      square.absolute_copy(@row, @column)
     end
   end
 end
