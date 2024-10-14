@@ -72,4 +72,17 @@ class Shape
     @row += row_direction
     @column += column_direction
   end
+
+  # Checks if A collides with B
+  # For better performance make sure A is the smallest shape
+  #
+  # @param b [Shape]
+  # @return [Boolean]
+  def collides_with(b)
+    b_squares_set = b.absolute_squares.map { |square| [square.row, square.column] }.to_set
+
+    absolute_squares.any? do |square_a|
+      b_squares_set.include?([square_a.row, square_a.column])
+    end
+  end
 end
