@@ -11,3 +11,5 @@ Lint/UselessAssignment:
   AutoCorrect: false
 Metrics/MethodLength:
   Enabled: false
+Lint/UnusedMethodArgument:
+  AutoCorrect: false

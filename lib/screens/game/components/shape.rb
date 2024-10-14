@@ -85,4 +85,18 @@ class Shape
       b_squares_set.include?([square_a.row, square_a.column])
     end
   end
+
+  # @param pray [Shape]
+  def eat(pray)
+    @squares.concat(pray.absolute_squares)
+  end
+
+  # @return [Boolean]
+  def within_bounds
+    absolute_squares.all? do |square|
+      square.column >= 0 &&
+        square.column < Config::PUZZLE_WIDTH &&
+        square.row < Config::PUZZLE_HEIGHT
+    end
+  end
 end

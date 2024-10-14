@@ -9,14 +9,14 @@ class Rubytris < Gosu::Window
   attr_reader :width, :height
 
   def initialize
-    @width = 640
-    @height = 480
+    @width = Config::CANVAS_WIDTH
+    @height = Config::CANVAS_HEIGHT
     super(@width, @height)
     self.caption = 'Tutorial Game'
 
     shape = Shape.new(
-      0,
-      0,
+      9,
+      3,
       [
         Square.new(0, 0, Gosu::Color::AQUA),
         Square.new(0, 1, Gosu::Color::GRAY),
@@ -25,7 +25,10 @@ class Rubytris < Gosu::Window
       ],
       Gosu::Color::CYAN
     )
-    @buffer_image = Gosu.record(300, 300) do
+
+    print(shape.within_bounds)
+
+    @buffer_image = Gosu.record(Config::WAR_ZONE_WIDTH, Config::CANVAS_HEIGHT) do
       shape.draw
     end
   end
@@ -33,7 +36,15 @@ class Rubytris < Gosu::Window
   def update; end
 
   def draw
-    @buffer_image.draw(0, 0, 0)
+    Gosu.draw_rect(
+      Config::SIDEBAR_WIDTH,
+      0,
+      Config::WAR_ZONE_WIDTH,
+      Config::CANVAS_HEIGHT,
+      Gosu::Color.rgba(0x333333ff)
+    )
+
+    @buffer_image.draw(Config::SIDEBAR_WIDTH, 0, 0)
   end
 end
 
