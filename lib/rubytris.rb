@@ -19,9 +19,9 @@ class Rubytris < Gosu::Window
       0,
       [
         Square.new(0, 0, Gosu::Color::AQUA),
-        Square.new(0, 1, Gosu::Color::AQUA),
-        Square.new(1, 0, Gosu::Color::AQUA),
-        Square.new(1, 1, Gosu::Color::AQUA)
+        Square.new(0, 1, Gosu::Color::GRAY),
+        Square.new(1, 0, Gosu::Color::FUCHSIA),
+        Square.new(1, 1, Gosu::Color::GREEN)
       ],
       Gosu::Color::CYAN
     )

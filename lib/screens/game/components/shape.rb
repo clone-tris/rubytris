@@ -71,8 +71,8 @@ class Shape
     # make square calculate its own absolute position
     @squares.map do |square|
       absolute_square = square.copy
-      absolute_grid.row = square.row + @row
-      absolute_grid.column = square.column + @column
+      absolute_square.row = square.row + @row
+      absolute_square.column = square.column + @column
       absolute_square
     end
   end

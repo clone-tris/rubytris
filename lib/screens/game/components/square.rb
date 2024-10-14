@@ -15,14 +15,22 @@ class Square
     @color = color
   end
 
-  ##
   # @param ref_row [Integer]
   # @param ref_column [Integer]
   def draw(ref_row, ref_column)
     width = Config::SQUARE_WIDTH
+    (x, y) = to_absolute(ref_row, ref_column)
+    Gosu.draw_rect(x, y, width, width, @color)
+  end
+
+  # @param ref_row [Integer]
+  # @param ref_column [Integer]
+  # @return [Array<(Integer, Integer)>]
+  def to_absolute(ref_row, ref_column)
+    width = Config::SQUARE_WIDTH
     x = (ref_column + @column) * width
     y = (ref_row + @row) * width
-    Gosu.draw_rect(x, y, width, width, Gosu::Color::BLUE)
+    [x, y]
   end
 
   def copy
