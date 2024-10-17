@@ -28,11 +28,8 @@ class PlayfieldScreen
         Square.new(16, 3, Colors::Tetromino::RED)
       ]
     )
-    @player = Shape.new(
-      0, 0,
-      [],
-      Colors::Tetromino::GREEN
-    )
+    @player = Tetromino.random_tetromino
+    @player.translate(8, 0)
   end
 
   def paint
