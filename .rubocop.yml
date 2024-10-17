@@ -13,3 +13,5 @@ Metrics/MethodLength:
   Enabled: false
 Lint/UnusedMethodArgument:
   AutoCorrect: false
+Layout/ArrayAlignment:
+  EnforcedStyle: with_fixed_indentation

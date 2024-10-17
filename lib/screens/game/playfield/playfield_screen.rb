@@ -19,12 +19,14 @@ class PlayfieldScreen
     )
     @opponent.width = Config::PUZZLE_WIDTH
     @opponent.height = Config::PUZZLE_HEIGHT
-    @opponent.squares = [
-      Square.new(19, 0, Colors::Tetromino::GREEN),
-      Square.new(18, 1, Colors::Tetromino::BLUE),
-      Square.new(17, 2, Colors::Tetromino::CYAN),
-      Square.new(16, 3, Colors::Tetromino::RED)
-    ]
+    @opponent.squares.concat(
+      [
+        Square.new(19, 0, Colors::Tetromino::GREEN),
+        Square.new(18, 1, Colors::Tetromino::BLUE),
+        Square.new(17, 2, Colors::Tetromino::CYAN),
+        Square.new(16, 3, Colors::Tetromino::RED)
+      ]
+    )
   end
 
   def paint
