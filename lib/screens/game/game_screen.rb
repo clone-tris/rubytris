@@ -6,6 +6,8 @@ class GameScreen < Screen
   attr_accessor :buffer_image
 
   def initialize
+    super
+
     @shape = Shape.new(
       0,
       0,
@@ -20,13 +22,13 @@ class GameScreen < Screen
   end
 
   def paint
-    playfiend_canvas = Gosu.record(Config::WAR_ZONE_WIDTH, Config::CANVAS_HEIGHT) do
+    playfiend_canvas = Gosu.render(Config::WAR_ZONE_WIDTH, Config::CANVAS_HEIGHT) do
       Gosu.draw_rect(
         0,
         0,
         Config::WAR_ZONE_WIDTH,
         Config::CANVAS_HEIGHT,
-        Gosu::Color.rgba(0x333333ff)
+        Gosu::Color.rgba(Colors::Ui::BACKGROUND)
       )
       @shape.draw
     end

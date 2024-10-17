@@ -3,6 +3,7 @@ $LOAD_PATH.unshift(File.expand_path('.', __dir__))
 require 'gosu'
 
 require 'config'
+require 'colors'
 require 'screens/game/game_screen'
 
 class Rubytris < Gosu::Window
