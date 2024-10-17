@@ -27,11 +27,17 @@ class PlayfieldScreen
         Square.new(16, 3, Colors::Tetromino::RED)
       ]
     )
+    @player = Shape.new(
+      0, 0,
+      [],
+      Colors::Tetromino::GREEN
+    )
   end
 
   def paint
     @painter.draw_background
     @painter.draw_guide(Config::WAR_ZONE_WIDTH, Config::CANVAS_HEIGHT)
     @opponent.draw
+    @player.draw
   end
 end
