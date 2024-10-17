@@ -31,6 +31,7 @@ class PlayfieldScreen
 
   def paint
     @painter.draw_background
+    @painter.draw_guide(Config::WAR_ZONE_WIDTH, Config::CANVAS_HEIGHT)
     @opponent.draw
   end
 end
