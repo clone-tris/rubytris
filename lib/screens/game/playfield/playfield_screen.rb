@@ -1,7 +1,3 @@
-require 'screens/game/playfield/playfield_painter'
-require 'screens/game/components/shape'
-require 'screens/game/components/tetromino'
-
 class PlayfieldScreen
   # @return [PlayfieldPainter]
   attr_accessor :painter

@@ -1,5 +1,3 @@
-require 'screens/game/sidebar/sidebar_painter'
-
 class SidebarScreen
   # @return [SidebarPainter]
   attr_reader :painter

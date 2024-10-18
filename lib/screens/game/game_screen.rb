@@ -1,8 +1,3 @@
-require 'engine/screen'
-require 'screens/game/playfield/playfield_screen'
-require 'screens/game/sidebar/sidebar_screen'
-require 'screens/game/components/score'
-
 class GameScreen < Screen
   def initialize
     super

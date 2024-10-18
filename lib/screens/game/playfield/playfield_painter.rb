@@ -1,5 +1,3 @@
-require 'engine/painter'
-
 class PlayfieldPainter < Painter
   def draw_background
     Gosu.draw_rect(

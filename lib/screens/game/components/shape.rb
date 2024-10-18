@@ -1,5 +1,3 @@
-require 'screens/game/components/square'
-
 class Shape
   # @return [Integer]
   attr_accessor :row
