@@ -6,7 +6,7 @@ class Score
   attr_accessor :total
 
   # @param lines_cleared [Integer]
-  attr_accessorr :lines_cleared
+  attr_accessor :lines_cleared
 
   def initialize
     @level = 1
