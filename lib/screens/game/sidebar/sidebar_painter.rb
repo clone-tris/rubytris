@@ -9,7 +9,10 @@ class SidebarPainter < Painter
     )
   end
 
-  def draw_next_player(next_player) end
+  # @param next_player_canvas [Gosu::Image]
+  def draw_next_player(next_player_canvas)
+    next_player_canvas.draw(Config::SQUARE_WIDTH, Config::SQUARE_WIDTH, 0)
+  end
 
   def draw_score(score) end
 end
