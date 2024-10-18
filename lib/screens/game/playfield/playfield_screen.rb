@@ -10,6 +10,8 @@ class PlayfieldScreen
   # @return [Shape]
   attr_accessor :player
 
+  # @param width [Integer]
+  # @param height [Integer]
   def initialize(width, height)
     @width = width
     @height = height

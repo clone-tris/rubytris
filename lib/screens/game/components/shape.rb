@@ -54,6 +54,7 @@ class Shape
   end
   # rubocop:enable Metrics/AbcSize
 
+  # @return [Shape]
   def copy
     Shape.new(@row, @column, @squares.map(&:copy), @color)
   end

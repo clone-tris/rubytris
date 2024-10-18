@@ -30,6 +30,7 @@ module Tetromino
   }.freeze
 
   # @param name [Symbol]
+  # @return [Shape]
   def self.get_tetromino(name)
     Shape.new(
       0,
@@ -39,6 +40,7 @@ module Tetromino
     )
   end
 
+  # @return [Shape]
   def self.random_tetromino
     get_tetromino(NAMES.sample)
   end

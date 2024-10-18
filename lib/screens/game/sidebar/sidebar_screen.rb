@@ -14,6 +14,7 @@ class SidebarScreen
     @score = score
   end
 
+  # @param next_player_canvas [Gosu::Image]
   def paint(next_player_canvas)
     @painter.draw_background(@width, @height)
     @painter.draw_next_player(next_player_canvas)

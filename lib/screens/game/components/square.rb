@@ -34,6 +34,7 @@ class Square
     c
   end
 
+  # @return [Square]
   def copy
     Square.new(@row, @column, @color)
   end
