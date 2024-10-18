@@ -2,13 +2,17 @@ require 'screens/game/sidebar/sidebar_painter'
 
 class SidebarScreen
   # @param score [Score]
-  def initialize(score)
+  def initialize(width, height, score)
+    @width = width
+    @height = height
     @painter = SidebarPainter.new
-    @nextPlayer = Tetromino.random_tetromino
+    @next_player = Tetromino.random_tetromino
     @score = score
   end
 
   def paint
-    @painter.draw_background
+    @painter.draw_background(@width, @height)
+    @painter.draw_next_player(@next_player)
+    @painter.draw_score(@score)
   end
 end

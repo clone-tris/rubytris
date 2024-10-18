@@ -7,8 +7,8 @@ class GameScreen < Screen
   def initialize
     super
     @score = Score.new
-    @playfield = PlayfieldScreen.new
-    @sidebar = SidebarScreen.new(@score)
+    @playfield = PlayfieldScreen.new(Config::WAR_ZONE_WIDTH, Config::CANVAS_HEIGHT)
+    @sidebar = SidebarScreen.new(Config::SIDEBAR_WIDTH, Config::CANVAS_HEIGHT, @score)
   end
 
   def paint

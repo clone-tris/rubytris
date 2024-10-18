@@ -10,7 +10,9 @@ class PlayfieldScreen
   # @return [Shape]
   attr_accessor :player
 
-  def initialize
+  def initialize(width, height)
+    @width = width
+    @height = height
     @painter = PlayfieldPainter.new
     @opponent = Shape.new(
       0,
@@ -33,8 +35,7 @@ class PlayfieldScreen
   end
 
   def paint
-    @painter.draw_background
-    @painter.draw_guide(Config::WAR_ZONE_WIDTH, Config::CANVAS_HEIGHT)
+    @painter.draw_guide(@width, @height)
     @opponent.draw
     @player.draw
   end
