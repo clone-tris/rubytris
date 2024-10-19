@@ -39,7 +39,11 @@ class GameScreen < Screen
 
   def update; end
 
-  def key_pressed(key); end
+  def button_down(key)
+    return unless @keys_table[key]
+
+    @keys_table[key].call
+  end
 
   def apply_gravity; end
 

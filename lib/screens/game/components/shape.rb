@@ -77,6 +77,7 @@ class Shape
       new_square = square.copy
       new_square.row = square.column
       new_square.column = @height - square.row - 1
+      new_square
     end
     compute_size
   end
