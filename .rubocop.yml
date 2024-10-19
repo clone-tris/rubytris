@@ -15,3 +15,5 @@ Lint/UnusedMethodArgument:
   AutoCorrect: false
 Layout/ArrayAlignment:
   EnforcedStyle: with_fixed_indentation
+Layout/LineLength:
+  Max: 100

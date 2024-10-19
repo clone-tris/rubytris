@@ -20,6 +20,11 @@ class Rubytris < Gosu::Window
   def draw
     @current_screen.paint
   end
+
+  # @param [Integer]
+  def button_down(key)
+    @current_screen.button_down(key)
+  end
 end
 
 Rubytris.new.show

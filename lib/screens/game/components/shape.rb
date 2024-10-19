@@ -72,12 +72,21 @@ class Shape
     @column += column_direction
   end
 
+  def rotate
+    @squares = @squares.map do |square|
+      new_square = square.copy
+      new_square.row = square.column
+      new_square.column = @height - square.row - 1
+    end
+    compute_size
+  end
+
   # Checks if A collides with B
   # For better performance make sure A is the smallest shape
   #
   # @param b [Shape]
   # @return [Boolean]
-  def collides_with(b)
+  def collides_with?(b)
     b_squares_set = b.absolute_squares.map { |square| [square.row, square.column] }.to_set
 
     absolute_squares.any? do |square_a|
@@ -91,7 +100,7 @@ class Shape
   end
 
   # @return [Boolean]
-  def within_bounds
+  def within_bounds?
     absolute_squares.all? do |square|
       square.column >= 0 &&
         square.column < Config::PUZZLE_WIDTH &&
