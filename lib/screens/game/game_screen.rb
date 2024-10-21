@@ -2,6 +2,7 @@ class GameScreen < Screen
   # rubocop:disable Metrics/AbcSize
   def initialize
     super
+    @score = Score.new
     @playfield = PlayfieldScreen.new(Config::WAR_ZONE_WIDTH, Config::CANVAS_HEIGHT)
     @sidebar = SidebarScreen.new(Config::SIDEBAR_WIDTH, Config::CANVAS_HEIGHT, @score)
     @paused = false
@@ -14,7 +15,6 @@ class GameScreen < Screen
     @remaining_after_paused = 0
     @floor_rate = 500
     @fall_rate = 1000
-    @score = Score.new
     @next_player = Tetromino.random_tetromino
     @keys_table = {
       Gosu::KB_W => method(:rotate_player),
