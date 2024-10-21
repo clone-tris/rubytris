@@ -1,4 +1,5 @@
 class GameScreen < Screen
+  # rubocop:disable Metrics/AbcSize
   def initialize
     super
     @playfield = PlayfieldScreen.new(Config::WAR_ZONE_WIDTH, Config::CANVAS_HEIGHT)
@@ -29,6 +30,7 @@ class GameScreen < Screen
       Gosu::KB_P => method(:toggle_paused)
     }
   end
+  # rubocop:enable Metrics/AbcSize
 
   def paint
     next_player_canvas = Gosu.render(4 * Config::SQUARE_WIDTH, 2 * Config::SQUARE_WIDTH) do
