@@ -1,11 +1,20 @@
 class GameScreen < Screen
   def initialize
     super
-    @paused = false
-    @score = Score.new
     @playfield = PlayfieldScreen.new(Config::WAR_ZONE_WIDTH, Config::CANVAS_HEIGHT)
-    @next_player = Tetromino.random_tetromino
     @sidebar = SidebarScreen.new(Config::SIDEBAR_WIDTH, Config::CANVAS_HEIGHT, @score)
+    @paused = false
+    @show_game_over = false
+    @is_player_falling = false
+    @is_mopping_floor = false
+    @on_floor = false
+    @should_restart = false
+    @next_fall = Time.now
+    @remaining_after_paused = 0
+    @floor_rate = 500
+    @fall_rate = 1000
+    @score = Score.new
+    @next_player = Tetromino.random_tetromino
     @keys_table = {
       Gosu::KB_W => method(:rotate_player),
       Gosu::KB_UP => method(:rotate_player),
@@ -47,7 +56,9 @@ class GameScreen < Screen
     @keys_table[key].call
   end
 
-  def apply_gravity; end
+  def apply_gravity
+    now = Time.now
+  end
 
   def make_player_fall; end
 
