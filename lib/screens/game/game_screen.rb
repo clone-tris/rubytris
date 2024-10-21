@@ -37,7 +37,9 @@ class GameScreen < Screen
     playfield_canvas.draw(Config::SIDEBAR_WIDTH, 0, 0)
   end
 
-  def update; end
+  def update
+    ScreenEvent::GO_TO_GAME if @should_restart
+  end
 
   def button_down(key)
     return unless @keys_table[key]
@@ -61,7 +63,9 @@ class GameScreen < Screen
 
   def toggle_paused; end
 
-  def restart; end
+  def restart
+    @should_restart = true
+  end
 
   # @param row_direction [Integer]
   # @param column_direction [Integer]
