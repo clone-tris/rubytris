@@ -14,7 +14,16 @@ class Rubytris < Gosu::Window
   end
 
   def update
-    @current_screen.update
+    screen_event = @current_screen.update
+
+    case screen_event
+    when ScreenEvent::GO_TO_GAME
+      @current_screen = GameScreen.new
+    when ScreenEvent::GO_TO_MENU
+      @current_screen = GameScreen.new
+    when ScreenEvent::GO_TO_OVER
+      @current_screen = GameScreen.new
+    end
   end
 
   def draw
