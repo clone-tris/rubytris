@@ -2,28 +2,26 @@ class GameScreen < Screen
   # rubocop:disable Metrics/AbcSize
   def initialize
     super
-    @score = Score.new
 
     @opponent = Shape.new(
       0,
       0,
-      [],
-      Colors::Square::DEFAULT_SQUARE_COLOR
-    )
-    @opponent.width = Config::PUZZLE_WIDTH
-    @opponent.height = Config::PUZZLE_HEIGHT
-    @opponent.squares.concat(
       [
         Square.new(19, 0, Colors::Tetromino::GREEN),
         Square.new(18, 1, Colors::Tetromino::BLUE),
         Square.new(17, 2, Colors::Tetromino::CYAN),
         Square.new(16, 3, Colors::Tetromino::RED)
-      ]
+      ],
+      Colors::Square::DEFAULT_SQUARE_COLOR
     )
+    @opponent.width = Config::PUZZLE_WIDTH
+    @opponent.height = Config::PUZZLE_HEIGHT
+
     @player = Tetromino.random_tetromino
-    @player.translate(8, 0)
+    @next_player = Tetromino.random_tetromino
 
     @painter = GamePainter.new
+    @score = Score.new
     @paused = false
     @show_game_over = false
     @is_player_falling = false
@@ -34,7 +32,6 @@ class GameScreen < Screen
     @remaining_after_paused = 0
     @floor_rate = 500
     @fall_rate = 1000
-    @next_player = Tetromino.random_tetromino
     @keys_table = {
       Gosu::KB_W => method(:rotate_player),
       Gosu::KB_UP => method(:rotate_player),
