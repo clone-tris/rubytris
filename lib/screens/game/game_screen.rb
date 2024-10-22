@@ -43,7 +43,8 @@ class GameScreen < Screen
       Gosu::KB_S => method(:move_player_down),
       Gosu::KB_DOWN => method(:move_player_down),
       Gosu::KB_R => method(:restart),
-      Gosu::KB_P => method(:toggle_paused)
+      Gosu::KB_P => method(:toggle_paused),
+      Gosu::KB_O => method(:spawn_player)
     }
   end
   # rubocop:enable Metrics/AbcSize
@@ -71,7 +72,13 @@ class GameScreen < Screen
 
   def mop_the_floor; end
 
-  def spawn_player; end
+  def spawn_player
+    player = @next_player.copy
+    player.row = player.row - player.height
+    player.column = ((Config::PUZZLE_WIDTH - player.width) / 2).floor
+    @player = player
+    @next_player = Tetromino.random_tetromino
+  end
 
   def apply_score; end
 
