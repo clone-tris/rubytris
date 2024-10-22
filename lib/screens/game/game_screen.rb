@@ -3,8 +3,28 @@ class GameScreen < Screen
   def initialize
     super
     @score = Score.new
-    @playfield = PlayfieldScreen.new(Config::WAR_ZONE_WIDTH, Config::CANVAS_HEIGHT)
+
+    @opponent = Shape.new(
+      0,
+      0,
+      [],
+      Colors::Square::DEFAULT_SQUARE_COLOR
+    )
+    @opponent.width = Config::PUZZLE_WIDTH
+    @opponent.height = Config::PUZZLE_HEIGHT
+    @opponent.squares.concat(
+      [
+        Square.new(19, 0, Colors::Tetromino::GREEN),
+        Square.new(18, 1, Colors::Tetromino::BLUE),
+        Square.new(17, 2, Colors::Tetromino::CYAN),
+        Square.new(16, 3, Colors::Tetromino::RED)
+      ]
+    )
+    @player = Tetromino.random_tetromino
+    @player.translate(8, 0)
+
     @sidebar = SidebarScreen.new(Config::SIDEBAR_WIDTH, Config::CANVAS_HEIGHT, @score)
+    @painter = GamePainter.new
     @paused = false
     @show_game_over = false
     @is_player_falling = false
@@ -33,19 +53,8 @@ class GameScreen < Screen
   # rubocop:enable Metrics/AbcSize
 
   def paint
-    next_player_canvas = Gosu.render(4 * Config::SQUARE_WIDTH, 2 * Config::SQUARE_WIDTH) do
-      @sidebar.painter.draw_guide(4 * Config::SQUARE_WIDTH, 2 * Config::SQUARE_WIDTH)
-      @next_player.draw
-    end
-    sidebar_ranvas = Gosu.render(Config::SIDEBAR_WIDTH, Config::CANVAS_HEIGHT) do
-      @sidebar.paint(next_player_canvas)
-    end
-    playfield_canvas = Gosu.render(Config::WAR_ZONE_WIDTH, Config::CANVAS_HEIGHT) do
-      @playfield.paint
-    end
-
-    sidebar_ranvas.draw(0, 0, 0)
-    playfield_canvas.draw(Config::SIDEBAR_WIDTH, 0, 0)
+    @painter.draw_sidebar(@sidebar, @next_player).draw(0, 0, 0)
+    @painter.draw_playfield(@opponent, @player).draw(Config::SIDEBAR_WIDTH, 0, 0)
   end
 
   def update
@@ -86,11 +95,11 @@ class GameScreen < Screen
   def move_player(row_direction, column_direction)
     return false if @paused
 
-    foreshadow = @playfield.player.copy
+    foreshadow = @player.copy
     foreshadow.translate(row_direction, column_direction)
-    able_to_move = !foreshadow.collides_with?(@playfield.opponent) && foreshadow.within_bounds?
+    able_to_move = !foreshadow.collides_with?(@opponent) && foreshadow.within_bounds?
 
-    @playfield.player = foreshadow if able_to_move
+    @player = foreshadow if able_to_move
 
     able_to_move
   end
@@ -98,11 +107,11 @@ class GameScreen < Screen
   def rotate_player
     return if @paused
 
-    foreshadow = @playfield.player.copy
+    foreshadow = @player.copy
     foreshadow.rotate
-    return unless !foreshadow.collides_with?(@playfield.opponent) && foreshadow.within_bounds?
+    return unless !foreshadow.collides_with?(@opponent) && foreshadow.within_bounds?
 
-    @playfield.player = foreshadow
+    @player = foreshadow
   end
 
   def move_player_left
