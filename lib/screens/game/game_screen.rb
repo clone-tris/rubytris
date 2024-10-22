@@ -23,7 +23,6 @@ class GameScreen < Screen
     @player = Tetromino.random_tetromino
     @player.translate(8, 0)
 
-    @sidebar = SidebarScreen.new(Config::SIDEBAR_WIDTH, Config::CANVAS_HEIGHT, @score)
     @painter = GamePainter.new
     @paused = false
     @show_game_over = false
@@ -53,7 +52,7 @@ class GameScreen < Screen
   # rubocop:enable Metrics/AbcSize
 
   def paint
-    @painter.draw_sidebar(@sidebar, @next_player).draw(0, 0, 0)
+    @painter.draw_sidebar(@next_player, @score).draw(0, 0, 0)
     @painter.draw_playfield(@opponent, @player).draw(Config::SIDEBAR_WIDTH, 0, 0)
   end
 
