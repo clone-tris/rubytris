@@ -108,12 +108,17 @@ class GameScreen < Screen
   # @param lines_removed [Integer]
   def apply_score(lines_removed)
     base_points = Score::POINTS_TABLE[lines_removed]
+    lines_cleared = @score.lines_cleared + lines_removed
+    level = (lines_cleared / 10).floor + 1
+    points = base_points * (level + 1)
+    total = @score.total + points
+
+    @score.level = level
+    @score.lines_cleared = lines_cleared
+    @score.total = total
   end
 
-  def reset_score; end
-
   def eat_player; end
-
   def toggle_paused; end
 
   def restart
