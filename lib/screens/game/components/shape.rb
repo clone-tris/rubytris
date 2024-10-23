@@ -100,6 +100,17 @@ class Shape
     @squares.concat(pray.absolute_squares)
   end
 
+  def find_full_rows
+    population_dict = {}
+
+    @squares.each_with_object([]) do |square, full_rows|
+      population_dict[square.row] = population_dict.fetch(square.row, 0) + 1
+      full_rows.push(square.row) if population_dict[square.row] >= Config::PUZZLE_WIDTH
+    end
+
+    full_rows
+  end
+
   # @return [Boolean]
   def within_bounds?
     absolute_squares.all? do |square|
