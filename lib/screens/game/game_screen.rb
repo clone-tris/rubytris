@@ -30,6 +30,7 @@ class GameScreen < Screen
     @should_restart = false
     @next_fall = Time.now
     @remaining_after_paused = 0
+    @end_of_lock = 0
     @floor_rate = 500
     @fall_rate = 1000
     @keys_table = {
@@ -66,9 +67,33 @@ class GameScreen < Screen
 
   def apply_gravity
     now = Time.now
+    return if now < @next_fall
+
+    if @on_floor
+      mop_the_floor
+    else
+      make_player_fall
+    end
   end
 
-  def make_player_fall; end
+  def make_player_fall
+    return if @paused || @is_player_falling
+
+    @is_player_falling = true
+
+    able_to_move = move_player_down
+    now = Time.now
+    if able_to_move
+      @on_floor = false
+      @next_fall = now + @fall_rate
+    else
+      @on_floor = true
+      @end_of_lock = now + @floor_rate
+      @next_fall = @end_of_lock
+    end
+
+    @is_player_falling = false
+  end
 
   def mop_the_floor; end
 
@@ -80,7 +105,10 @@ class GameScreen < Screen
     @next_player = Tetromino.random_tetromino
   end
 
-  def apply_score; end
+  # @param lines_removed [Integer]
+  def apply_score(lines_removed)
+    base_points = Score::POINTS_TABLE[lines_removed]
+  end
 
   def reset_score; end
 
