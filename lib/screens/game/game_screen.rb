@@ -12,7 +12,7 @@ class GameScreen < Screen
     @opponent.width = Config::PUZZLE_WIDTH
     @opponent.height = Config::PUZZLE_HEIGHT
 
-    @player = Tetromino.random_tetromino
+    @player = nil
     @next_player = Tetromino.random_tetromino
 
     @painter = GamePainter.new
@@ -26,8 +26,8 @@ class GameScreen < Screen
     @next_fall = Time.now
     @remaining_after_paused = 0
     @end_of_lock = 0
-    @floor_rate = 500
-    @fall_rate = 1000
+    @floor_rate = 0.5
+    @fall_rate = 0.2
     @keys_table = {
       Gosu::KB_W => method(:rotate_player),
       Gosu::KB_UP => method(:rotate_player),
@@ -42,6 +42,8 @@ class GameScreen < Screen
       Gosu::KB_P => method(:toggle_paused),
       Gosu::KB_O => method(:spawn_player)
     }
+
+    spawn_player
   end
   # rubocop:enable Metrics/AbcSize
 
@@ -52,6 +54,8 @@ class GameScreen < Screen
 
   def update
     ScreenEvent::GO_TO_GAME if @should_restart
+
+    apply_gravity
   end
 
   def button_down(key)
@@ -98,7 +102,8 @@ class GameScreen < Screen
 
     able_to_move = move_player_down
     unless able_to_move
-      eat_player
+      @opponent.eat(@player)
+      remove_full_lines
       spawn_player
 
       if @player.collides_with?(@opponent)
@@ -132,13 +137,12 @@ class GameScreen < Screen
     @score.total = total
   end
 
-  def eat_player
-    @opponent.eat(@player)
+  def remove_full_lines
     lines_removed = @opponent.remove_full_lines
     return if lines_removed.empty?
 
     current_level = @score.level
-    apply_score(lines_removed)
+    apply_score(lines_removed.size)
 
     @fall_rate -= @fall_rate / 3 if current_level != @score.level
   end
