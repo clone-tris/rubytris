@@ -53,7 +53,8 @@ class GameScreen < Screen
   end
 
   def update
-    ScreenEvent::GO_TO_GAME if @should_restart
+    return [ScreenEvent::GO_TO_GAME] if @should_restart
+    return [ScreenEvent::GO_TO_OVER] if @show_game_over
 
     apply_gravity
   end

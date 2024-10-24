@@ -14,7 +14,7 @@ class Rubytris < Gosu::Window
   end
 
   def update
-    screen_event = @current_screen.update
+    screen_event, *rest = @current_screen.update
 
     case screen_event
     when ScreenEvent::GO_TO_GAME
