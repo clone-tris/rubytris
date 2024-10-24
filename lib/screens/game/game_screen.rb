@@ -90,7 +90,26 @@ class GameScreen < Screen
     @is_player_falling = false
   end
 
-  def mop_the_floor; end
+  def mop_the_floor
+    now = Time.now
+    return if now < @end_of_lock || @paused || @is_mopping_floor
+
+    @is_mopping_floor = true
+
+    able_to_move = move_player_down
+    unless able_to_move
+      eat_player
+      spawn_player
+
+      if @player.collides_with?(@opponent)
+        @show_game_over = true
+        return
+      end
+    end
+
+    @on_floor = false
+    @is_mopping_floor = false
+  end
 
   def spawn_player
     player = @next_player.copy
