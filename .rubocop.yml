@@ -9,6 +9,8 @@ Layout/EndOfLine:
 Lint/UselessAssignment:
   Enabled: true
   AutoCorrect: false
+Metrics/ClassLength:
+  Enabled: false
 Metrics/MethodLength:
   Enabled: false
 Lint/UnusedMethodArgument:
