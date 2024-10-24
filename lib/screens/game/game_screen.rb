@@ -124,7 +124,19 @@ class GameScreen < Screen
     @fall_rate -= @fall_rate / 3 if current_level != @score.level
   end
 
-  def toggle_paused; end
+  def toggle_paused
+    @paused = !@paused
+
+    return unless @paused
+
+    now = Time.now
+    @remaining_after_paused =
+      if now < @next_fall
+        @next_fall - now
+      else
+        0
+      end
+  end
 
   def restart
     @should_restart = true
