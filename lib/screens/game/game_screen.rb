@@ -27,7 +27,7 @@ class GameScreen < Screen
     @remaining_after_paused = 0
     @end_of_lock = 0
     @floor_rate = 0.5
-    @fall_rate = 0.2
+    @fall_rate = 1
     @keys_table = {
       Gosu::KB_W => method(:rotate_player),
       Gosu::KB_UP => method(:rotate_player),
