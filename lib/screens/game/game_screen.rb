@@ -113,7 +113,17 @@ class GameScreen < Screen
     @score.total = total
   end
 
-  def eat_player; end
+  def eat_player
+    @opponent.eat(@player)
+    lines_removed = @opponent.remove_full_lines
+    return if lines_removed.empty?
+
+    current_level = @score.level
+    apply_score(lines_removed)
+
+    @fall_rate -= @fall_rate / 3 if current_level != @score.level
+  end
+
   def toggle_paused; end
 
   def restart
