@@ -100,6 +100,24 @@ class Shape
     @squares.concat(pray.absolute_squares)
   end
 
+  def remove_full_lines
+    full_rows = find_full_rows
+    return if full_rows.empty?
+
+    @squares = @squares.each_with_object([]) do |square, grid|
+      next if full_rows.include?(square.row)
+
+      row_before_shifting = square.row
+      full_rows.each do |full_row|
+        square.row += 1 if full_row > row_before_shifting
+      end
+      grid.push(square)
+    end
+
+    full_rows
+  end
+
+  # @return Array<Integer>
   def find_full_rows
     population_dict = {}
 
@@ -107,8 +125,6 @@ class Shape
       population_dict[square.row] = population_dict.fetch(square.row, 0) + 1
       full_rows.push(square.row) if population_dict[square.row] >= Config::PUZZLE_WIDTH
     end
-
-    full_rows
   end
 
   # @return [Boolean]

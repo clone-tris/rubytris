@@ -8,15 +8,22 @@ class GameScreen < Screen
       0,
       [
         Square.new(19, 0, Colors::Tetromino::GREEN),
-        Square.new(18, 1, Colors::Tetromino::BLUE),
-        Square.new(17, 2, Colors::Tetromino::CYAN),
-        Square.new(16, 3, Colors::Tetromino::RED)
+        Square.new(19, 1, Colors::Tetromino::GREEN),
+        Square.new(19, 2, Colors::Tetromino::GREEN),
+        Square.new(19, 3, Colors::Tetromino::GREEN),
+        Square.new(19, 4, Colors::Tetromino::GREEN),
+        Square.new(19, 5, Colors::Tetromino::GREEN),
+        Square.new(19, 6, Colors::Tetromino::GREEN),
+        Square.new(19, 7, Colors::Tetromino::GREEN),
+        Square.new(19, 8, Colors::Tetromino::GREEN),
+        Square.new(19, 9, Colors::Tetromino::GREEN)
       ],
       Colors::Square::DEFAULT_SQUARE_COLOR
     )
     @opponent.width = Config::PUZZLE_WIDTH
     @opponent.height = Config::PUZZLE_HEIGHT
-
+    @opponent.remove_full_lines
+    puts @opponent.inspect
     @player = Tetromino.random_tetromino
     @next_player = Tetromino.random_tetromino
 
