@@ -48,7 +48,7 @@ class GameScreen < Screen
   # rubocop:enable Metrics/AbcSize
 
   def paint
-    @painter.draw_sidebar(@next_player, @score).draw(0, 0, 0)
+    @painter.draw_sidebar(@next_player, @score)
     @painter.draw_playfield(@opponent, @player).draw(Config::SIDEBAR_WIDTH, 0, 0)
   end
 

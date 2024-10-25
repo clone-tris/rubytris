@@ -12,11 +12,9 @@ class GamePainter < Painter
       draw_guide(4 * Config::SQUARE_WIDTH, 2 * Config::SQUARE_WIDTH)
       next_player.draw
     end
-    Gosu.render(Config::SIDEBAR_WIDTH, Config::CANVAS_HEIGHT) do
-      draw_sidebar_background(Config::SIDEBAR_WIDTH, Config::CANVAS_HEIGHT)
-      draw_next_player(next_player_canvas)
-      draw_score(score)
-    end
+    draw_sidebar_background(Config::SIDEBAR_WIDTH, Config::CANVAS_HEIGHT)
+    draw_next_player(next_player_canvas)
+    draw_score(score)
   end
 
   # @params playfield [PlayfieldScreen]
