@@ -47,19 +47,19 @@ class GamePainter < Painter
   def draw_score(score)
     @font.draw_text(
       "Level\n#{score.level}",
-      (Config::SQUARE_WIDTH / 3).floor,
+      Config::SQUARE_WIDTH / 3,
       Config::SQUARE_WIDTH * 4,
       0
     )
     @font.draw_text(
       "Cleared\n#{score.lines_cleared}",
-      (Config::SQUARE_WIDTH / 3).floor,
+      Config::SQUARE_WIDTH / 3,
       Config::SQUARE_WIDTH * 6,
       0
     )
     @font.draw_text(
       "Score\n#{score.total}",
-      (Config::SQUARE_WIDTH / 3).floor,
+      Config::SQUARE_WIDTH / 3,
       Config::SQUARE_WIDTH * 8,
       0
     )

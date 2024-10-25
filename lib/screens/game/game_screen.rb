@@ -120,7 +120,7 @@ class GameScreen < Screen
   def spawn_player
     player = @next_player.copy
     player.row = player.row - player.height
-    player.column = ((Config::PUZZLE_WIDTH - player.width) / 2).floor
+    player.column = (Config::PUZZLE_WIDTH - player.width) / 2
     @player = player
     @next_player = Tetromino.random_tetromino
   end
@@ -129,7 +129,7 @@ class GameScreen < Screen
   def apply_score(lines_removed)
     base_points = Score::POINTS_TABLE[lines_removed]
     lines_cleared = @score.lines_cleared + lines_removed
-    level = (lines_cleared / 10).floor + 1
+    level = lines_cleared / 10 + 1
     points = base_points * (level + 1)
     total = @score.total + points
 
@@ -145,7 +145,7 @@ class GameScreen < Screen
     current_level = @score.level
     apply_score(lines_removed.size)
 
-    @fall_rate -= @fall_rate / 3 if current_level != @score.level
+    @fall_rate -= @fall_rate / 3.0 if current_level != @score.level
   end
 
   def toggle_paused
