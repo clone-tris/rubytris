@@ -29,6 +29,7 @@ class GameScreen < Screen
     @floor_rate = 0.5
     @fall_rate = 1
     @keys_table = {
+      Gosu::KB_O => method(:lose_the_game),
       Gosu::KB_R => method(:restart),
       Gosu::KB_P => method(:toggle_paused),
       Gosu::KB_W => method(:rotate_player),
@@ -163,6 +164,10 @@ class GameScreen < Screen
 
   def restart
     @should_restart = true
+  end
+
+  def lose_the_game
+    @show_game_over = true
   end
 
   # @param row_direction [Integer]

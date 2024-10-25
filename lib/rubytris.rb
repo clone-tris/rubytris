@@ -27,7 +27,7 @@ class Rubytris < Gosu::Window
     when ScreenEvent::GO_TO_MENU
       @current_screen = GameScreen.new
     when ScreenEvent::GO_TO_OVER
-      @current_screen = GameScreen.new
+      @current_screen = OverScreen.new
     end
   end
 
