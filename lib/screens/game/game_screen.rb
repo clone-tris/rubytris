@@ -29,6 +29,8 @@ class GameScreen < Screen
     @floor_rate = 0.5
     @fall_rate = 1
     @keys_table = {
+      Gosu::KB_R => method(:restart),
+      Gosu::KB_P => method(:toggle_paused),
       Gosu::KB_W => method(:rotate_player),
       Gosu::KB_UP => method(:rotate_player),
       Gosu::KB_SPACE => method(:rotate_player),
@@ -37,9 +39,7 @@ class GameScreen < Screen
       Gosu::KB_D => method(:move_player_right),
       Gosu::KB_RIGHT => method(:move_player_right),
       Gosu::KB_S => method(:move_player_down),
-      Gosu::KB_DOWN => method(:move_player_down),
-      Gosu::KB_R => method(:restart),
-      Gosu::KB_P => method(:toggle_paused)
+      Gosu::KB_DOWN => method(:move_player_down)
     }
 
     spawn_player

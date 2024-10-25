@@ -5,4 +5,7 @@ class Screen
 
   # @param key [Integer]
   def button_down(key); end
+
+  # @param key [Integer]
+  def button_up(key); end
 end
