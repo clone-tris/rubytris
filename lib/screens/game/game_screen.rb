@@ -39,8 +39,7 @@ class GameScreen < Screen
       Gosu::KB_S => method(:move_player_down),
       Gosu::KB_DOWN => method(:move_player_down),
       Gosu::KB_R => method(:restart),
-      Gosu::KB_P => method(:toggle_paused),
-      Gosu::KB_O => method(:spawn_player)
+      Gosu::KB_P => method(:toggle_paused)
     }
 
     spawn_player
