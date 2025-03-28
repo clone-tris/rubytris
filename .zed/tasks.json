@@ -1,7 +1,7 @@
 [
   {
     "label": "Run project",
-    "command": "ruby lib/rubytris.rb",
+    "command": "bundle exec rake run",
     "shell": "system"
   }
 ]
