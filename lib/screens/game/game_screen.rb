@@ -59,7 +59,7 @@ class GameScreen < Screen
     apply_gravity
   end
 
-  def button_down(key)
+  def button_down(key, _mouse_x, _mouse_y)
     return unless @keys_table[key]
 
     @keys_table[key].call

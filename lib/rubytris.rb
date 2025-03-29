@@ -14,7 +14,7 @@ class Rubytris < Gosu::Window
     @keys_down = {}
     @last_fired = {}
     @repeat_count = {}
-    @current_screen = GameScreen.new
+    @current_screen = OverScreen.new
   end
 
   def update
@@ -23,11 +23,14 @@ class Rubytris < Gosu::Window
 
     case screen_event
     when ScreenEvent::GO_TO_GAME
+      puts 'go to game event triggered'
       @current_screen = GameScreen.new
     when ScreenEvent::GO_TO_MENU
       @current_screen = GameScreen.new
     when ScreenEvent::GO_TO_OVER
       @current_screen = OverScreen.new
+    when ScreenEvent::QUIT
+      close!
     end
   end
 
@@ -41,7 +44,7 @@ class Rubytris < Gosu::Window
     @last_fired[key] = Time.now
     @repeat_count[key] = 0
 
-    @current_screen.button_down(key)
+    @current_screen.button_down(key, mouse_x, mouse_y)
   end
 
   # @param [Integer]
@@ -50,7 +53,7 @@ class Rubytris < Gosu::Window
     @last_fired.delete(key)
     @repeat_count.delete(key)
 
-    @current_screen.button_up(key)
+    @current_screen.button_up(key, mouse_x, mouse_y)
   end
 
   def handle_repeated_keys
@@ -61,7 +64,7 @@ class Rubytris < Gosu::Window
 
       next unless current_time - (@last_fired[key] || 0) >= delay
 
-      @current_screen.button_down(key)
+      @current_screen.button_down(key, mouse_x, mouse_y)
       @last_fired[key] = current_time
       @repeat_count[key] += 1
     end
