@@ -14,7 +14,7 @@ class Rubytris < Gosu::Window
     @keys_down = {}
     @last_fired = {}
     @repeat_count = {}
-    @current_screen = OverScreen.new
+    @current_screen = MenuScreen.new
   end
 
   def update
@@ -23,10 +23,9 @@ class Rubytris < Gosu::Window
 
     case screen_event
     when ScreenEvent::GO_TO_GAME
-      puts 'go to game event triggered'
       @current_screen = GameScreen.new
     when ScreenEvent::GO_TO_MENU
-      @current_screen = GameScreen.new
+      @current_screen = MenuScreen.new
     when ScreenEvent::GO_TO_OVER
       @current_screen = OverScreen.new
     when ScreenEvent::QUIT
