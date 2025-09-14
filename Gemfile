@@ -1,9 +1,10 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-gem 'gosu'
+gem "gosu"
 
 group :development do
-  gem 'rake'
-  gem 'solargraph', group: :development
-  gem 'yard'
+  gem "rake"
+  gem "solargraph"
+  gem "syntax_tree"
+  gem "yard"
 end
