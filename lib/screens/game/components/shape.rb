@@ -1,3 +1,9 @@
+WIDTH = Config::SQUARE_WIDTH
+BORDER_WIDTH = Config::SQUARE_BORDER_WIDTH
+W = WIDTH
+BW = BORDER_WIDTH
+R = W - BW * 2
+
 class Shape
   # @return [Integer]
   attr_accessor :row
@@ -29,11 +35,93 @@ class Shape
 
   def draw
     @squares.each do |square|
-      square.draw(@row, @column)
+      draw_square(square)
     end
   end
 
+  # @param square [Square]
   # rubocop:disable Metrics/AbcSize
+  def draw_square(square)
+    x = (@column + square.column) * W
+    y = (@row + square.row) * W
+    Gosu.draw_rect(x, y, W, W, square.color)
+
+    # Left
+    Gosu.draw_triangle(
+      x, y, Colors::Square::BORDER_SIDE,
+      x + BW, y + BW, Colors::Square::BORDER_SIDE,
+      x, y + BW, Colors::Square::BORDER_SIDE
+    )
+    Gosu.draw_rect(
+      x,
+      y + BW,
+      BW, R,
+      Colors::Square::BORDER_SIDE
+    )
+    Gosu.draw_triangle(
+      x, y + BW + R, Colors::Square::BORDER_SIDE,
+      x + BW, y + BW + R, Colors::Square::BORDER_SIDE,
+      x, y + W, Colors::Square::BORDER_SIDE
+    )
+
+    # Top
+
+    Gosu.draw_triangle(
+      x, y, Colors::Square::BORDER_TOP,
+      x + BW, y, Colors::Square::BORDER_TOP,
+      x + BW, y + BW, Colors::Square::BORDER_TOP
+    )
+    Gosu.draw_rect(
+      x + BW,
+      y,
+      R, BW,
+      Colors::Square::BORDER_TOP
+    )
+    Gosu.draw_triangle(
+      x + BW + R, y, Colors::Square::BORDER_TOP,
+      x + W, y, Colors::Square::BORDER_TOP,
+      x + BW + R, y + BW, Colors::Square::BORDER_TOP
+    )
+
+    # Right
+
+    Gosu.draw_triangle(
+      x + W, y, Colors::Square::BORDER_SIDE,
+      x + W, y + BW, Colors::Square::BORDER_SIDE,
+      x + R + BW, y + BW, Colors::Square::BORDER_SIDE
+    )
+    Gosu.draw_rect(
+      x + BW + R,
+      y + BW,
+      BW, R,
+      Colors::Square::BORDER_SIDE
+    )
+    Gosu.draw_triangle(
+      x + BW + R, y + BW + R, Colors::Square::BORDER_SIDE,
+      x + W, y + BW + R, Colors::Square::BORDER_SIDE,
+      x + W, y + W, Colors::Square::BORDER_SIDE
+    )
+
+    # BOTTOM
+
+    Gosu.draw_triangle(
+      x + BW + R, y + BW + R, Colors::Square::BORDER_BOTTOM,
+      x + W, y + W, Colors::Square::BORDER_BOTTOM,
+      x + R + BW, y + W, Colors::Square::BORDER_BOTTOM
+    )
+    Gosu.draw_rect(
+      x + BW,
+      y + R + BW,
+      R, BW,
+      Colors::Square::BORDER_BOTTOM
+    )
+    Gosu.draw_triangle(
+      x, y + W, Colors::Square::BORDER_BOTTOM,
+      x + BW, y + BW + R, Colors::Square::BORDER_BOTTOM,
+      x + BW, y + W, Colors::Square::BORDER_BOTTOM
+    )
+  end
+
   def compute_size
     min_row = Config::PUZZLE_HEIGHT
     max_row = 0
