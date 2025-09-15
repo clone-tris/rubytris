@@ -7,14 +7,8 @@ class OverScreen < Screen
     @quit = false
     @font = Gosu::Font.new(34)
     @message = "Game Over!"
-    @restart_button =
-      Button.new(
-        "[R]estart",
-        4 * Config::SQUARE_WIDTH,
-        17 * Config::SQUARE_WIDTH
-      )
-    @quit_button =
-      Button.new("[Q]uit", 9 * Config::SQUARE_WIDTH, 17 * Config::SQUARE_WIDTH)
+    @restart_button = Button.new("[R]estart", 4 * Config::SQUARE_WIDTH, 17 * Config::SQUARE_WIDTH)
+    @quit_button = Button.new("[Q]uit", 9 * Config::SQUARE_WIDTH, 17 * Config::SQUARE_WIDTH)
   end
 
   def paint
@@ -38,13 +32,7 @@ class OverScreen < Screen
     box_x = (Config::CANVAS_WIDTH - box_width) / 2
     box_y = (Config::CANVAS_HEIGHT - box_height) / 2.67
 
-    Gosu.draw_rect(
-      box_x,
-      box_y,
-      box_width,
-      box_height,
-      Colors::Ui::POPUP_BACKGROUND
-    )
+    Gosu.draw_rect(box_x, box_y, box_width, box_height, Colors::Ui::POPUP_BACKGROUND)
     @font.draw_text(
       @message,
       (box_x + PADDING).floor,

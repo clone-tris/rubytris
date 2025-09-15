@@ -201,12 +201,9 @@ class Shape
   # @param b [Shape]
   # @return [Boolean]
   def collides_with?(b)
-    b_squares_set =
-      b.absolute_squares.map { |square| [square.row, square.column] }.to_set
+    b_squares_set = b.absolute_squares.map { |square| [square.row, square.column] }.to_set
 
-    absolute_squares.any? do |square_a|
-      b_squares_set.include?([square_a.row, square_a.column])
-    end
+    absolute_squares.any? { |square_a| b_squares_set.include?([square_a.row, square_a.column]) }
   end
 
   # @param pray [Shape]
@@ -224,9 +221,7 @@ class Shape
         next if full_rows.include?(square.row)
 
         row_before_shifting = square.row
-        full_rows.each do |full_row|
-          square.row += 1 if full_row > row_before_shifting
-        end
+        full_rows.each { |full_row| square.row += 1 if full_row > row_before_shifting }
         grid.push(square)
       end
 
@@ -240,9 +235,7 @@ class Shape
     # @return Array<Integer>
     @squares.each_with_object([]) do |square, full_rows|
       population_dict[square.row] = population_dict.fetch(square.row, 0) + 1
-      if population_dict[square.row] >= Config::PUZZLE_WIDTH
-        full_rows.push(square.row)
-      end
+      full_rows.push(square.row) if population_dict[square.row] >= Config::PUZZLE_WIDTH
     end
   end
 

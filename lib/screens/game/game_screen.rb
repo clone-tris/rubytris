@@ -44,11 +44,7 @@ class GameScreen < Screen
 
   def paint
     @painter.draw_sidebar(@next_player, @score)
-    @painter.draw_playfield(@opponent, @player).draw(
-      Config::SIDEBAR_WIDTH,
-      0,
-      0
-    )
+    @painter.draw_playfield(@opponent, @player).draw(Config::SIDEBAR_WIDTH, 0, 0)
   end
 
   def update
@@ -173,8 +169,7 @@ class GameScreen < Screen
 
     foreshadow = @player.copy
     foreshadow.translate(row_direction, column_direction)
-    able_to_move =
-      !foreshadow.collides_with?(@opponent) && foreshadow.within_bounds?
+    able_to_move = !foreshadow.collides_with?(@opponent) && foreshadow.within_bounds?
 
     @player = foreshadow if able_to_move
 
@@ -186,9 +181,7 @@ class GameScreen < Screen
 
     foreshadow = @player.copy
     foreshadow.rotate
-    unless !foreshadow.collides_with?(@opponent) && foreshadow.within_bounds?
-      return
-    end
+    return unless !foreshadow.collides_with?(@opponent) && foreshadow.within_bounds?
 
     @player = foreshadow
   end
