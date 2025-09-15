@@ -42,8 +42,9 @@ GRAPHIC_COORDS = [
   [14, 6],
   [14, 7],
   [14, 8]
-  ].freeze
+].freeze
 
-GRAPHIC_GRID = GRAPHIC_COORDS.map do |cell|
-  Square.new(cell[0], cell[1], Colors::Square::DEFAULT_SQUARE_COLOR)
-end
+GRAPHIC_GRID =
+  GRAPHIC_COORDS.map do |cell|
+    Square.new(cell[0], cell[1], Colors::Square::DEFAULT_SQUARE_COLOR)
+  end

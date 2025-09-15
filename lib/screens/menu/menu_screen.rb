@@ -5,15 +5,13 @@ class MenuScreen < Screen
     @start = false
     @quit = false
 
-    @graphic = Shape.new(
-      0,
-      0,
-      GRAPHIC_GRID,
-      Colors::Square::DEFAULT_SQUARE_COLOR
-    )
+    @graphic =
+      Shape.new(0, 0, GRAPHIC_GRID, Colors::Square::DEFAULT_SQUARE_COLOR)
 
-    @start_button = Button.new '[S]tart', 4 * Config::SQUARE_WIDTH, 17 * Config::SQUARE_WIDTH
-    @quit_button = Button.new '[Q]uit', 9 * Config::SQUARE_WIDTH, 17 * Config::SQUARE_WIDTH
+    @start_button =
+      Button.new "[S]tart", 4 * Config::SQUARE_WIDTH, 17 * Config::SQUARE_WIDTH
+    @quit_button =
+      Button.new "[Q]uit", 9 * Config::SQUARE_WIDTH, 17 * Config::SQUARE_WIDTH
   end
 
   def paint
