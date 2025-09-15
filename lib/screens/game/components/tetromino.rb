@@ -1,13 +1,5 @@
 module Tetromino
-  NAMES = %i[
-    T
-    Z
-    S
-    L
-    J
-    O
-    I
-  ].freeze
+  NAMES = %i[T Z S L J O I].freeze
 
   SQUARES = {
     T: [[0, 0], [0, 1], [0, 2], [1, 1]],

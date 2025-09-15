@@ -8,10 +8,11 @@ class GamePainter < Painter
   # @params next_player [Shape]
   # @params score [Score]
   def draw_sidebar(next_player, score)
-    next_player_canvas = Gosu.render(4 * Config::SQUARE_WIDTH, 2 * Config::SQUARE_WIDTH) do
-      draw_guide(4 * Config::SQUARE_WIDTH, 2 * Config::SQUARE_WIDTH)
-      next_player.draw
-    end
+    next_player_canvas =
+      Gosu.render(4 * Config::SQUARE_WIDTH, 2 * Config::SQUARE_WIDTH) do
+        draw_guide(4 * Config::SQUARE_WIDTH, 2 * Config::SQUARE_WIDTH)
+        next_player.draw
+      end
     draw_sidebar_background(Config::SIDEBAR_WIDTH, Config::CANVAS_HEIGHT)
     draw_next_player(next_player_canvas)
     draw_score(score)
@@ -29,13 +30,7 @@ class GamePainter < Painter
   # @param width [Integer]
   # @param height [Integer]
   def draw_sidebar_background(width, height)
-    Gosu.draw_rect(
-      0,
-      0,
-      width,
-      height,
-      Colors::Ui::SIDEBAR_BACKGROUND
-    )
+    Gosu.draw_rect(0, 0, width, height, Colors::Ui::SIDEBAR_BACKGROUND)
   end
 
   # @param next_player_canvas [Gosu::Image]

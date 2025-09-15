@@ -34,9 +34,7 @@ class Shape
   end
 
   def draw
-    @squares.each do |square|
-      draw_square(square)
-    end
+    @squares.each { |square| draw_square(square) }
   end
 
   # @param square [Square]
@@ -48,77 +46,105 @@ class Shape
 
     # Left
     Gosu.draw_triangle(
-      x, y, Colors::Square::BORDER_SIDE,
-      x + BW, y + BW, Colors::Square::BORDER_SIDE,
-      x, y + BW, Colors::Square::BORDER_SIDE
-    )
-    Gosu.draw_rect(
+      x,
+      y,
+      Colors::Square::BORDER_SIDE,
+      x + BW,
+      y + BW,
+      Colors::Square::BORDER_SIDE,
       x,
       y + BW,
-      BW, R,
       Colors::Square::BORDER_SIDE
     )
+    Gosu.draw_rect(x, y + BW, BW, R, Colors::Square::BORDER_SIDE)
     Gosu.draw_triangle(
-      x, y + BW + R, Colors::Square::BORDER_SIDE,
-      x + BW, y + BW + R, Colors::Square::BORDER_SIDE,
-      x, y + W, Colors::Square::BORDER_SIDE
+      x,
+      y + BW + R,
+      Colors::Square::BORDER_SIDE,
+      x + BW,
+      y + BW + R,
+      Colors::Square::BORDER_SIDE,
+      x,
+      y + W,
+      Colors::Square::BORDER_SIDE
     )
 
     # Top
 
     Gosu.draw_triangle(
-      x, y, Colors::Square::BORDER_TOP,
-      x + BW, y, Colors::Square::BORDER_TOP,
-      x + BW, y + BW, Colors::Square::BORDER_TOP
-    )
-    Gosu.draw_rect(
+      x,
+      y,
+      Colors::Square::BORDER_TOP,
       x + BW,
       y,
-      R, BW,
+      Colors::Square::BORDER_TOP,
+      x + BW,
+      y + BW,
       Colors::Square::BORDER_TOP
     )
+    Gosu.draw_rect(x + BW, y, R, BW, Colors::Square::BORDER_TOP)
     Gosu.draw_triangle(
-      x + BW + R, y, Colors::Square::BORDER_TOP,
-      x + W, y, Colors::Square::BORDER_TOP,
-      x + BW + R, y + BW, Colors::Square::BORDER_TOP
+      x + BW + R,
+      y,
+      Colors::Square::BORDER_TOP,
+      x + W,
+      y,
+      Colors::Square::BORDER_TOP,
+      x + BW + R,
+      y + BW,
+      Colors::Square::BORDER_TOP
     )
 
     # Right
 
     Gosu.draw_triangle(
-      x + W, y, Colors::Square::BORDER_SIDE,
-      x + W, y + BW, Colors::Square::BORDER_SIDE,
-      x + R + BW, y + BW, Colors::Square::BORDER_SIDE
-    )
-    Gosu.draw_rect(
-      x + BW + R,
+      x + W,
+      y,
+      Colors::Square::BORDER_SIDE,
+      x + W,
       y + BW,
-      BW, R,
+      Colors::Square::BORDER_SIDE,
+      x + R + BW,
+      y + BW,
       Colors::Square::BORDER_SIDE
     )
+    Gosu.draw_rect(x + BW + R, y + BW, BW, R, Colors::Square::BORDER_SIDE)
     Gosu.draw_triangle(
-      x + BW + R, y + BW + R, Colors::Square::BORDER_SIDE,
-      x + W, y + BW + R, Colors::Square::BORDER_SIDE,
-      x + W, y + W, Colors::Square::BORDER_SIDE
+      x + BW + R,
+      y + BW + R,
+      Colors::Square::BORDER_SIDE,
+      x + W,
+      y + BW + R,
+      Colors::Square::BORDER_SIDE,
+      x + W,
+      y + W,
+      Colors::Square::BORDER_SIDE
     )
 
     # BOTTOM
 
     Gosu.draw_triangle(
-      x + BW + R, y + BW + R, Colors::Square::BORDER_BOTTOM,
-      x + W, y + W, Colors::Square::BORDER_BOTTOM,
-      x + R + BW, y + W, Colors::Square::BORDER_BOTTOM
-    )
-    Gosu.draw_rect(
-      x + BW,
-      y + R + BW,
-      R, BW,
+      x + BW + R,
+      y + BW + R,
+      Colors::Square::BORDER_BOTTOM,
+      x + W,
+      y + W,
+      Colors::Square::BORDER_BOTTOM,
+      x + R + BW,
+      y + W,
       Colors::Square::BORDER_BOTTOM
     )
+    Gosu.draw_rect(x + BW, y + R + BW, R, BW, Colors::Square::BORDER_BOTTOM)
     Gosu.draw_triangle(
-      x, y + W, Colors::Square::BORDER_BOTTOM,
-      x + BW, y + BW + R, Colors::Square::BORDER_BOTTOM,
-      x + BW, y + W, Colors::Square::BORDER_BOTTOM
+      x,
+      y + W,
+      Colors::Square::BORDER_BOTTOM,
+      x + BW,
+      y + BW + R,
+      Colors::Square::BORDER_BOTTOM,
+      x + BW,
+      y + W,
+      Colors::Square::BORDER_BOTTOM
     )
   end
 
@@ -148,9 +174,7 @@ class Shape
   # @return [Array<Square>]
   def absolute_squares
     # make square calculate its own absolute position
-    @squares.map do |square|
-      square.absolute_copy(@row, @column)
-    end
+    @squares.map { |square| square.absolute_copy(@row, @column) }
   end
 
   # @param row_direction [Integer]
@@ -161,12 +185,13 @@ class Shape
   end
 
   def rotate
-    @squares = @squares.map do |square|
-      new_square = square.copy
-      new_square.row = square.column
-      new_square.column = @height - square.row - 1
-      new_square
-    end
+    @squares =
+      @squares.map do |square|
+        new_square = square.copy
+        new_square.row = square.column
+        new_square.column = @height - square.row - 1
+        new_square
+      end
     compute_size
   end
 
@@ -176,7 +201,8 @@ class Shape
   # @param b [Shape]
   # @return [Boolean]
   def collides_with?(b)
-    b_squares_set = b.absolute_squares.map { |square| [square.row, square.column] }.to_set
+    b_squares_set =
+      b.absolute_squares.map { |square| [square.row, square.column] }.to_set
 
     absolute_squares.any? do |square_a|
       b_squares_set.include?([square_a.row, square_a.column])
@@ -193,15 +219,16 @@ class Shape
     full_rows = find_full_rows
     return [] if full_rows.empty?
 
-    @squares = @squares.each_with_object([]) do |square, grid|
-      next if full_rows.include?(square.row)
+    @squares =
+      @squares.each_with_object([]) do |square, grid|
+        next if full_rows.include?(square.row)
 
-      row_before_shifting = square.row
-      full_rows.each do |full_row|
-        square.row += 1 if full_row > row_before_shifting
+        row_before_shifting = square.row
+        full_rows.each do |full_row|
+          square.row += 1 if full_row > row_before_shifting
+        end
+        grid.push(square)
       end
-      grid.push(square)
-    end
 
     full_rows
   end
@@ -213,15 +240,16 @@ class Shape
     # @return Array<Integer>
     @squares.each_with_object([]) do |square, full_rows|
       population_dict[square.row] = population_dict.fetch(square.row, 0) + 1
-      full_rows.push(square.row) if population_dict[square.row] >= Config::PUZZLE_WIDTH
+      if population_dict[square.row] >= Config::PUZZLE_WIDTH
+        full_rows.push(square.row)
+      end
     end
   end
 
   # @return [Boolean]
   def within_bounds?
     absolute_squares.all? do |square|
-      square.column >= 0 &&
-        square.column < Config::PUZZLE_WIDTH &&
+      square.column >= 0 && square.column < Config::PUZZLE_WIDTH &&
         square.row < Config::PUZZLE_HEIGHT
     end
   end

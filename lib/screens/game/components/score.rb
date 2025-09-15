@@ -14,6 +14,7 @@ class Score
     @lines_cleared = 0
   end
 
+  # stree-ignore
   POINTS_TABLE = {
     1 => 40,
     2 => 100,

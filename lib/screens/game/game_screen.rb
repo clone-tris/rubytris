@@ -3,12 +3,7 @@ class GameScreen < Screen
   def initialize
     super
 
-    @opponent = Shape.new(
-      0,
-      0,
-      [],
-      Colors::Square::DEFAULT_SQUARE_COLOR
-    )
+    @opponent = Shape.new(0, 0, [], Colors::Square::DEFAULT_SQUARE_COLOR)
     @opponent.width = Config::PUZZLE_WIDTH
     @opponent.height = Config::PUZZLE_HEIGHT
 
@@ -49,7 +44,11 @@ class GameScreen < Screen
 
   def paint
     @painter.draw_sidebar(@next_player, @score)
-    @painter.draw_playfield(@opponent, @player).draw(Config::SIDEBAR_WIDTH, 0, 0)
+    @painter.draw_playfield(@opponent, @player).draw(
+      Config::SIDEBAR_WIDTH,
+      0,
+      0
+    )
   end
 
   def update
@@ -69,11 +68,7 @@ class GameScreen < Screen
     now = Time.now
     return if now < @next_fall
 
-    if @on_floor
-      mop_the_floor
-    else
-      make_player_fall
-    end
+    @on_floor ? mop_the_floor : make_player_fall
   end
 
   def make_player_fall
@@ -178,7 +173,8 @@ class GameScreen < Screen
 
     foreshadow = @player.copy
     foreshadow.translate(row_direction, column_direction)
-    able_to_move = !foreshadow.collides_with?(@opponent) && foreshadow.within_bounds?
+    able_to_move =
+      !foreshadow.collides_with?(@opponent) && foreshadow.within_bounds?
 
     @player = foreshadow if able_to_move
 
@@ -190,7 +186,9 @@ class GameScreen < Screen
 
     foreshadow = @player.copy
     foreshadow.rotate
-    return unless !foreshadow.collides_with?(@opponent) && foreshadow.within_bounds?
+    unless !foreshadow.collides_with?(@opponent) && foreshadow.within_bounds?
+      return
+    end
 
     @player = foreshadow
   end
