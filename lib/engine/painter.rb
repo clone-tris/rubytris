@@ -2,13 +2,7 @@ class Painter
   # @param width [Integer]
   # @param height [Integer]
   def draw_guide(width, height)
-    Gosu.draw_rect(
-      0,
-      0,
-      width,
-      height,
-      Colors::Ui::BACKGROUND
-    )
+    Gosu.draw_rect(0, 0, width, height, Colors::Ui::BACKGROUND)
 
     rows = height / Config::SQUARE_WIDTH
     columns = width / Config::SQUARE_WIDTH

@@ -1,5 +1,5 @@
-$LOAD_PATH.unshift(File.expand_path('.', __dir__))
-require 'imports'
+$LOAD_PATH.unshift(File.expand_path(".", __dir__))
+require "imports"
 
 class Rubytris < Gosu::Window
   INITIAL_REPEAT_DELAY = 0.3
@@ -9,7 +9,7 @@ class Rubytris < Gosu::Window
     @width = Config::CANVAS_WIDTH
     @height = Config::CANVAS_HEIGHT
     super(@width, @height)
-    self.caption = 'Rubytris'
+    self.caption = "Rubytris"
 
     @keys_down = {}
     @last_fired = {}
